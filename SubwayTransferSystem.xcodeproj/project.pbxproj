@@ -13,6 +13,7 @@
 		E2820345230FE48700D4F69C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2820344230FE48700D4F69C /* Assets.xcassets */; };
 		E2820348230FE48700D4F69C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2820347230FE48700D4F69C /* Preview Assets.xcassets */; };
 		E282034B230FE48700D4F69C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2820349230FE48700D4F69C /* LaunchScreen.storyboard */; };
+		E2820353230FE52400D4F69C /* VertexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2820352230FE52400D4F69C /* VertexView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		E2820347230FE48700D4F69C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		E282034A230FE48700D4F69C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E282034C230FE48700D4F69C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2820352230FE52400D4F69C /* VertexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				E2820349230FE48700D4F69C /* LaunchScreen.storyboard */,
 				E282034C230FE48700D4F69C /* Info.plist */,
 				E2820346230FE48700D4F69C /* Preview Content */,
+				E2820352230FE52400D4F69C /* VertexView.swift */,
 			);
 			path = SubwayTransferSystem;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2820353230FE52400D4F69C /* VertexView.swift in Sources */,
 				E282033F230FE48600D4F69C /* AppDelegate.swift in Sources */,
 				E2820341230FE48600D4F69C /* SceneDelegate.swift in Sources */,
 				E2820343230FE48600D4F69C /* ContentView.swift in Sources */,
