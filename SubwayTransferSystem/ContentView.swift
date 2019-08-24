@@ -24,7 +24,7 @@ struct StationsView: View {
     
     var body: some View {
         ForEach(model.vertexIDs, id: \.self) { index in
-            VertexView()
+            VertexView(name: self.model.vertices[index].name)
                 .position(self.model.vertices[index].position)
         }.gesture(DragGesture(minimumDistance: 0.1)
             .onEnded { value in
