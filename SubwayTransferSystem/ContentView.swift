@@ -25,29 +25,41 @@ struct ContentView: View {
         return graph
     }()
     
+    @State var start = ""
+    @State var destination = ""
+    
     var body: some View {
-        ZStack {
-            Path { path in
-                for x in model.arcs {
-                    path.move(to: model.vertices[x.key].position)
-                    for y in x.value {
-                        path.addLine(to: model.vertices[y.index].position)
+        VStack {
+            ZStack {
+                Path { path in
+                    for x in model.arcs {
                         path.move(to: model.vertices[x.key].position)
+                        for y in x.value {
+                            path.addLine(to: model.vertices[y.index].position)
+                            path.move(to: model.vertices[x.key].position)
+                        }
                     }
-                }
-            }.strokedPath(StrokeStyle(lineWidth: 5)).fill(Color.red)
+                }.strokedPath(StrokeStyle(lineWidth: 5)).fill(Color.red)
+                
+                ForEach(model.vertices, id: \.id) { station in
+                    VertexView()
+                        .position(station.position)
+                }.gesture(DragGesture(minimumDistance: 0.1)
+                    .onEnded { value in
+                        self.model.addStation(Station(name: "fuck", position: value.location))
+                    }
+                )
+            }
             
-            ForEach(model.vertices, id: \.id) { station in
-                VertexView()
-                    .position(station.position)
-            }.gesture(DragGesture(minimumDistance: 0.1)
-                .onEnded { value in
-                    self.model.addStation(Station(name: "fuck", position: value.location))
-                }
-            )
+            TextField("起点", text: $start)
+            TextField("终点", text: self.$destination)
+            Button(action: {
+                withAnimation { self.model.addSubwayLine(from: self.start, to: self.destination) }
+            }) { Text("添加线路") }
         }
     }
 }
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
