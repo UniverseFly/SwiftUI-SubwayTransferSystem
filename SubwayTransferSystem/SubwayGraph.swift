@@ -19,20 +19,22 @@ struct SubwayGraph {
     var vertices = [Station]()
     var arcs = [Int: Set<ArcNode>]()
     
-    var stationToIndex = [Station: Int]()
+    /// 站点名到它所在下标的 map
+    var stationToIndex = [String: Int]()
     
     mutating func addStation(_ station: Station) {
         vertices.append(station)
-        stationToIndex[station] = vertices.count - 1
+        stationToIndex[station.name] = vertices.count - 1
     }
     
-    mutating func addSubwayLine(from start: Station, to destination: Station) {
-        guard let startIndex = stationToIndex[start],
-            let endIndex = stationToIndex[destination]
+    mutating func addSubwayLine(from start: String, to destination: String) {
+        guard let startIndex = stationToIndex[start], let destIndex = stationToIndex[destination]
             else { return }
         
         if (arcs[startIndex] == nil) { arcs[startIndex] = Set() }
-        let node = ArcNode(index: endIndex, distance: Station.distance(start, destination))
+        let startStation = vertices[startIndex], destStation = vertices[destIndex]
+        
+        let node = ArcNode(index: destIndex, distance: Station.distance(startStation, destStation))
         arcs[startIndex]!.insert(node)
     }
 }

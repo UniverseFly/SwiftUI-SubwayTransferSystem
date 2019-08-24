@@ -14,7 +14,9 @@ struct Station {
     var position: CGPoint
     
     static func distance(_ lhs: Self, _ rhs: Self) -> Double {
-        Double(lhs.position.x * rhs.position.x + rhs.position.y * rhs.position.y)
+        let deltaX = lhs.position.x - rhs.position.x
+        let deltaY = rhs.position.y - rhs.position.y
+        return Double(deltaX * deltaY)
     }
 }
 
