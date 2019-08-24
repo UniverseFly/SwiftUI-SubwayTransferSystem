@@ -9,6 +9,10 @@
 import SwiftUI
 import CoreGraphics
 
+extension Station {
+    var id: UUID { UUID() }
+}
+
 struct ContentView: View {
     @State var model: SubwayGraph = {
         var graph = SubwayGraph()
@@ -31,13 +35,16 @@ struct ContentView: View {
                         path.move(to: model.vertices[x.key].position)
                     }
                 }
-            }.strokedPath(.init()).fill(Color.red)
+            }.strokedPath(StrokeStyle(lineWidth: 5)).fill(Color.red)
             
-            ForEach(model.vertices, id: \.name) { station in
+            ForEach(model.vertices, id: \.id) { station in
                 VertexView()
                     .position(station.position)
-            }
-            Text("hello")
+            }.gesture(DragGesture(minimumDistance: 0.1)
+                .onEnded { value in
+                    self.model.addStation(Station(name: "fuck", position: value.location))
+                }
+            )
         }
     }
 }
