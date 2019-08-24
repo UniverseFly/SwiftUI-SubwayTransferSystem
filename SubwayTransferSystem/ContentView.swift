@@ -13,6 +13,25 @@ extension SubwayGraph {
     var vertexIDs: [Int] {
         .init(0..<vertices.count)
     }
+    
+    var subwayLineIDs: [Int] {
+        .init(0..<subwayLines.count)
+    }
+}
+
+struct StationsView: View {
+    @Binding var model: SubwayGraph
+    
+    var body: some View {
+        ForEach(model.vertexIDs, id: \.self) { index in
+            VertexView()
+                .position(self.model.vertices[index].position)
+        }.gesture(DragGesture(minimumDistance: 0.1)
+            .onEnded { value in
+                withAnimation { self.model.addStation(Station(name: "fuck", position: value.location)) }
+            }
+        )
+    }
 }
 
 struct ContentView: View {
@@ -27,38 +46,90 @@ struct ContentView: View {
         return graph
     }()
     
-    @State var start = ""
-    @State var destination = ""
+    @State var tog = false
+    
+    @State var i = ""
     
     var body: some View {
         VStack {
             ZStack {
-                Path { path in
-                    for x in model.arcs {
-                        path.move(to: model.vertices[x.key].position)
-                        for y in x.value {
-                            path.addLine(to: model.vertices[y.index].position)
-                            path.move(to: model.vertices[x.key].position)
-                        }
-                    }
-                }.strokedPath(StrokeStyle(lineWidth: 5)).fill(Color.red)
-                
-                ForEach(model.vertexIDs, id: \.self) { index in
-                    VertexView()
-                        .position(self.model.vertices[index].position)
-                }.gesture(DragGesture(minimumDistance: 0.1)
-                    .onEnded { value in
-                        withAnimation { self.model.addStation(Station(name: "fuck", position: value.location)) }
-                    }
-                )
+                SubwayLinesView(model: $model)
+                StationsView(model: $model)
             }
-            
-            TextField("起点", text: $start)
-            TextField("终点", text: self.$destination)
-            Button(action: {
-                withAnimation { self.model.addSubwayLine(from: self.start, to: self.destination) }
-            }) { Text("添加线路") }
         }
+    }
+}
+
+struct SubwayLinesView: View {
+    @Binding var model: SubwayGraph
+    @State var start = 0
+    @State var destination = 0
+    @State private var ratio: CGFloat = 0
+    
+    var body: some View {
+        VStack {
+            SubwayLines(model: model)
+            Picker(selection: $start, label: Text("起点")) {
+                ForEach(model.vertexIDs, id: \.self) { index in
+                    Text(self.model.vertices[index].name)
+                }
+            }
+            Picker(selection: $destination, label: Text("终点")) {
+                ForEach(model.vertexIDs, id: \.self) { index in
+                    Text(self.model.vertices[index].name)
+                }
+            }
+            Button(action: {
+                self.model.addSubwayLine(from: self.model.vertices[self.start].name, to: self.model.vertices[self.destination].name)
+                }
+            ) { Text("添加线路") }
+        }
+    }
+}
+
+struct SubwayLines: View {
+    var model: SubwayGraph
+    
+    var body: some View {
+        ZStack {
+            ForEach(model.subwayLineIDs, id: \.self) { id in
+                LineView(start: self.model.subwayLines[id].start,
+                         end: self.model.subwayLines[id].destination)
+            }
+        }
+    }
+}
+
+struct LineView: View {
+    @State private var show: Bool = false
+    var start: CGPoint
+    var end: CGPoint
+    
+    var body: some View {
+        Line(ratio: show ? 1 : 0, start: start, end: end)
+            .stroke(Color.yellow, lineWidth: 4)
+            .animation(.easeInOut(duration: 1.5))
+            .onAppear { self.show = true }
+    }
+}
+
+struct Line: Shape {
+    var ratio: CGFloat
+    var start: CGPoint
+    var end: CGPoint
+
+    func path(in rect: CGRect) -> Path {
+        var p = Path()
+        p.move(to: start)
+        p.addLine(to: CGPoint(x: start.x + ratio * (end.x - start.x),
+                              y: start.y + ratio * (end.y - start.y)))
+
+        return p
+    }
+
+    var animatableData: CGFloat {
+        get { return ratio }
+        set { ratio = newValue }
     }
 }
 

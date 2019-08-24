@@ -22,6 +22,9 @@ struct SubwayGraph {
     /// 站点名到它所在下标的 map
     var stationToIndex = [String: Int]()
     
+    /// 所有线路的起始和终点坐标
+    private(set) var subwayLines: [(start: CGPoint, destination: CGPoint)] = []
+    
     mutating func addStation(_ station: Station) {
         vertices.append(station)
         stationToIndex[station.name] = vertices.count - 1
@@ -36,5 +39,7 @@ struct SubwayGraph {
         
         let node = ArcNode(index: destIndex, distance: Station.distance(startStation, destStation))
         arcs[startIndex]!.insert(node)
+        
+        subwayLines.append((startStation.position, destStation.position))
     }
 }
