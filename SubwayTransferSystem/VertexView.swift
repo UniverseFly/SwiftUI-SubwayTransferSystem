@@ -14,18 +14,18 @@ struct VertexView: View {
     @State private var showDetail = false
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 0.5) {
-            if (showDetail) { Text(name).border(Color.gray, width: 3) }
+        VStack(spacing: 5) {
+            if (showDetail) { Text(name).padding(5).background(Color.gray.opacity(0.4))
+            }
             Circle()
                 .foregroundColor(Color.gray)
                 .overlay(Circle().stroke(Color.white, lineWidth: 2.5))
                 .shadow(radius: 2.5)
                 .frame(width: 15, height: 15)
-                .onLongPressGesture {
-                    withAnimation { self.showDetail.toggle() }
-                }
-        }.frame(width: 40, height: 40, alignment: .bottomLeading)
-            .position(x: 20, y: -5).frame(width: 15, height: 15, alignment: .bottomLeading)
+        }
+        .onLongPressGesture {
+            withAnimation { self.showDetail.toggle() }
+        }
     }
 }
 
