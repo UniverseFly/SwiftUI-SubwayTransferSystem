@@ -10,28 +10,7 @@ import SwiftUI
 import CoreGraphics
 
 extension SubwayGraph {
-    var vertexIDs: [Int] {
-        .init(0..<vertices.count)
-    }
-    
-    var subwayLineIDs: [Int] {
-        .init(0..<subwayLines.count)
-    }
-}
-
-struct StationsView: View {
-    @Binding var model: SubwayGraph
-    
-    var body: some View {
-        ForEach(model.vertexIDs, id: \.self) { index in
-            VertexView(name: self.model.vertices[index].name)
-                .position(self.model.vertices[index].position)
-        }.gesture(DragGesture(minimumDistance: 0.1)
-            .onEnded { value in
-                withAnimation { self.model.addStation(Station(name: "fuck", position: value.location)) }
-            }
-        )
-    }
+    var vertexIDs: Range<Int> { 0..<vertices.count }
 }
 
 struct ContentView: View {
@@ -53,99 +32,49 @@ struct ContentView: View {
         (3, .init(x: 200, y: 300), .init(x: 200, y: 200)),
     ]
     
-    @State var tog = false
+    @State private var startIndex = 0
+    @State private var destIndex = 0
+    @State var showSubwayLines = false
+    @State var showRecommendedRoutes = false
+
     
     var body: some View {
+        NavigationView {
         VStack {
             ZStack {
-                SubwayLinesView(model: $model)
-                StationsView(model: $model)
-                if (tog) {
-                    ForEach(points, id: \.0) { point in
-                        LineView(start: point.1, end: point.2)
-                            .foregroundColor(Color.red)
-                    }
+                SubwayLinesView(positions: model.subwayLines, show: showSubwayLines)
+                
+                StationsView.init(stations: model.vertices)
+                    .gesture(DragGesture(minimumDistance: 0.1).onEnded { value in
+                        withAnimation {
+                            self.model.addStation(Station(name: "self.newStationName",
+                                                          position: value.location))
+                        }
+                    })
+                
+                ForEach(points, id: \.0) { point in
+                    StretchableLineView(start: point.1, destination: point.2,
+                                     show: self.showRecommendedRoutes)
+                        .foregroundColor(Color.red)
                 }
             }
-            Toggle(isOn: $tog) { Text("nothing") }.frame(width: 40, height: 20)
-        }
-    }
-}
-
-struct SubwayLinesView: View {
-    @Binding var model: SubwayGraph
-    @State var start = 0
-    @State var destination = 0
-    @State private var ratio: CGFloat = 0
-    
-    var body: some View {
-        VStack {
-            SubwayLines(model: model)
-            Picker(selection: $start, label: Text("起点")) {
-                ForEach(model.vertexIDs, id: \.self) { index in
-                    Text(self.model.vertices[index].name)
-                }
-            }
-            Picker(selection: $destination, label: Text("终点")) {
-                ForEach(model.vertexIDs, id: \.self) { index in
-                    Text(self.model.vertices[index].name)
-                }
-            }
+            
+            StationPickerView(stations: model.vertices,
+                              start: $startIndex,
+                              destination: $destIndex)
+            
             Button(action: {
-                self.model.addSubwayLine(from: self.model.vertices[self.start].name, to: self.model.vertices[self.destination].name)
-                }
-            ) { Text("添加线路") }
+                let startStation = self.model.vertices[self.startIndex].name
+                let destStation = self.model.vertices[self.destIndex].name
+                self.model.addSubwayLine(from: startStation, to: destStation)
+            }) { Text("添加线路") }
+            
+            AppUIOptionsView(showSubwayLines: $showSubwayLines,
+                             showRecommendedRoutes: $showRecommendedRoutes)
+        }
         }
     }
 }
-
-struct SubwayLines: View {
-    var model: SubwayGraph
-    
-    var body: some View {
-        ZStack {
-            ForEach(model.subwayLineIDs, id: \.self) { id in
-                LineView(start: self.model.subwayLines[id].start,
-                         end: self.model.subwayLines[id].destination)
-                    .foregroundColor(Color.yellow)
-            }
-        }
-    }
-}
-
-struct LineView: View {
-    @State private var show: Bool = false
-    var start: CGPoint
-    var end: CGPoint
-    
-    var body: some View {
-        Line(ratio: show ? 1 : 0, start: start, end: end)
-            .stroke(lineWidth: 3.3)
-            .animation(.easeInOut(duration: 1.5))
-            .onAppear { self.show = true }
-    }
-}
-
-struct Line: Shape {
-    var ratio: CGFloat
-    var start: CGPoint
-    var end: CGPoint
-
-    func path(in rect: CGRect) -> Path {
-        var p = Path()
-        p.move(to: start)
-        p.addLine(to: CGPoint(x: start.x + ratio * (end.x - start.x),
-                              y: start.y + ratio * (end.y - start.y)))
-
-        return p
-    }
-
-    var animatableData: CGFloat {
-        get { return ratio }
-        set { ratio = newValue }
-    }
-}
-
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

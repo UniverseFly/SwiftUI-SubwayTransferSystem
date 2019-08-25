@@ -16,6 +16,11 @@
 		E2820353230FE52400D4F69C /* VertexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2820352230FE52400D4F69C /* VertexView.swift */; };
 		E2820355230FE68700D4F69C /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2820354230FE68700D4F69C /* Station.swift */; };
 		E2820357230FF71600D4F69C /* SubwayGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2820356230FF71600D4F69C /* SubwayGraph.swift */; };
+		E2FDD9622312C2F800B00793 /* StretchableLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FDD9612312C2F800B00793 /* StretchableLineView.swift */; };
+		E2FDD9642312C46100B00793 /* StationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FDD9632312C46100B00793 /* StationsView.swift */; };
+		E2FDD9662312CA9D00B00793 /* SubwayLinesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FDD9652312CA9D00B00793 /* SubwayLinesView.swift */; };
+		E2FDD9682312D59A00B00793 /* AppUIOptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FDD9672312D59A00B00793 /* AppUIOptionsView.swift */; };
+		E2FDD96A2312D62100B00793 /* StationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FDD9692312D62100B00793 /* StationPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +35,11 @@
 		E2820352230FE52400D4F69C /* VertexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexView.swift; sourceTree = "<group>"; };
 		E2820354230FE68700D4F69C /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		E2820356230FF71600D4F69C /* SubwayGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayGraph.swift; sourceTree = "<group>"; };
+		E2FDD9612312C2F800B00793 /* StretchableLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StretchableLineView.swift; sourceTree = "<group>"; };
+		E2FDD9632312C46100B00793 /* StationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsView.swift; sourceTree = "<group>"; };
+		E2FDD9652312CA9D00B00793 /* SubwayLinesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayLinesView.swift; sourceTree = "<group>"; };
+		E2FDD9672312D59A00B00793 /* AppUIOptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUIOptionsView.swift; sourceTree = "<group>"; };
+		E2FDD9692312D62100B00793 /* StationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +75,10 @@
 				E282033E230FE48600D4F69C /* AppDelegate.swift */,
 				E2820340230FE48600D4F69C /* SceneDelegate.swift */,
 				E2820342230FE48600D4F69C /* ContentView.swift */,
+				E2FDD9632312C46100B00793 /* StationsView.swift */,
+				E2FDD9612312C2F800B00793 /* StretchableLineView.swift */,
+				E2FDD9672312D59A00B00793 /* AppUIOptionsView.swift */,
+				E2FDD9692312D62100B00793 /* StationPickerView.swift */,
 				E2820344230FE48700D4F69C /* Assets.xcassets */,
 				E2820349230FE48700D4F69C /* LaunchScreen.storyboard */,
 				E282034C230FE48700D4F69C /* Info.plist */,
@@ -72,6 +86,7 @@
 				E2820352230FE52400D4F69C /* VertexView.swift */,
 				E2820354230FE68700D4F69C /* Station.swift */,
 				E2820356230FF71600D4F69C /* SubwayGraph.swift */,
+				E2FDD9652312CA9D00B00793 /* SubwayLinesView.swift */,
 			);
 			path = SubwayTransferSystem;
 			sourceTree = "<group>";
@@ -157,9 +172,14 @@
 			files = (
 				E2820357230FF71600D4F69C /* SubwayGraph.swift in Sources */,
 				E2820353230FE52400D4F69C /* VertexView.swift in Sources */,
+				E2FDD9662312CA9D00B00793 /* SubwayLinesView.swift in Sources */,
+				E2FDD9682312D59A00B00793 /* AppUIOptionsView.swift in Sources */,
 				E2820355230FE68700D4F69C /* Station.swift in Sources */,
+				E2FDD9622312C2F800B00793 /* StretchableLineView.swift in Sources */,
 				E282033F230FE48600D4F69C /* AppDelegate.swift in Sources */,
+				E2FDD9642312C46100B00793 /* StationsView.swift in Sources */,
 				E2820341230FE48600D4F69C /* SceneDelegate.swift in Sources */,
+				E2FDD96A2312D62100B00793 /* StationPickerView.swift in Sources */,
 				E2820343230FE48600D4F69C /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

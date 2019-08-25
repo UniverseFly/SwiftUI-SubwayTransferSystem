@@ -28,9 +28,3 @@ struct VertexView: View {
         }
     }
 }
-
-//struct VertexView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        VertexView()
-//    }
-//}
