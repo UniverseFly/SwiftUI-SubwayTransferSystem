@@ -46,16 +46,28 @@ struct ContentView: View {
         return graph
     }()
     
-    @State var tog = false
+    var points: [(Int, CGPoint, CGPoint)] = [
+        (0, .init(x: 10, y: 300), .init(x: 200, y: 300)),
+        (1, .init(x: 50, y: 300), .init(x: 200, y: 10)),
+        (2, .init(x: 100, y: 300), .init(x: 200, y: 250)),
+        (3, .init(x: 200, y: 300), .init(x: 200, y: 200)),
+    ]
     
-    @State var i = ""
+    @State var tog = false
     
     var body: some View {
         VStack {
             ZStack {
                 SubwayLinesView(model: $model)
                 StationsView(model: $model)
+                if (tog) {
+                    ForEach(points, id: \.0) { point in
+                        LineView(start: point.1, end: point.2)
+                            .foregroundColor(Color.red)
+                    }
+                }
             }
+            Toggle(isOn: $tog) { Text("nothing") }.frame(width: 40, height: 20)
         }
     }
 }
@@ -95,6 +107,7 @@ struct SubwayLines: View {
             ForEach(model.subwayLineIDs, id: \.self) { id in
                 LineView(start: self.model.subwayLines[id].start,
                          end: self.model.subwayLines[id].destination)
+                    .foregroundColor(Color.yellow)
             }
         }
     }
@@ -107,7 +120,7 @@ struct LineView: View {
     
     var body: some View {
         Line(ratio: show ? 1 : 0, start: start, end: end)
-            .stroke(Color.yellow, lineWidth: 4)
+            .stroke(lineWidth: 3.3)
             .animation(.easeInOut(duration: 1.5))
             .onAppear { self.show = true }
     }
