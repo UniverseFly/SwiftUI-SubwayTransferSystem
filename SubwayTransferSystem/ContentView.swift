@@ -34,7 +34,7 @@ struct ContentView: View {
     
     @State private var startIndex = 0
     @State private var destIndex = 0
-    @State var showSubwayLines = false
+    @State var showSubwayLines = true
     @State var showRecommendedRoutes = false
 
     
