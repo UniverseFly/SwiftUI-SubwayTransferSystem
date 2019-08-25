@@ -59,19 +59,19 @@ struct ContentView: View {
                 }
             }
             
+            Form {
             StationPickerView(stations: model.vertices,
                               start: $startIndex,
-                              destination: $destIndex)
-            
-            Button(action: {
-                let startStation = self.model.vertices[self.startIndex].name
-                let destStation = self.model.vertices[self.destIndex].name
-                self.model.addSubwayLine(from: startStation, to: destStation)
-            }) { Text("添加线路") }
+                              destination: $destIndex) {
+                                let startStation = self.model.vertices[self.startIndex].name
+                                let destStation = self.model.vertices[self.destIndex].name
+                                self.model.addSubwayLine(from: startStation, to: destStation)
+                }
             
             AppUIOptionsView(showSubwayLines: $showSubwayLines,
                              showRecommendedRoutes: $showRecommendedRoutes)
-        }
+            }
+            }
         }
     }
 }

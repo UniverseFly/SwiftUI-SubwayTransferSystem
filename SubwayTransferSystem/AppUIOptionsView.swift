@@ -16,10 +16,7 @@ struct AppUIOptionsView: View {
     var body: some View {
         Section {
             Toggle("显示地铁线路", isOn: $showSubwayLines)
-                .padding([.leading, .trailing])
-            
             Toggle("显示换乘信息", isOn: $showRecommendedRoutes)
-                .padding([.leading, .trailing])
         }
     }
 }
