@@ -23,6 +23,8 @@ struct VertexView: View {
                 .shadow(radius: 2.5)
                 .frame(width: 15, height: 15)
         }
+        .animation(.easeInOut(duration: 1.3))
+        .transition(.scale)
         .onLongPressGesture {
             withAnimation { self.showDetail.toggle() }
         }

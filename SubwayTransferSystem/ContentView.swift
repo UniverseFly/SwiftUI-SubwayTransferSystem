@@ -46,10 +46,8 @@ struct ContentView: View {
                 
                 StationsView.init(stations: model.vertices)
                     .gesture(DragGesture(minimumDistance: 0.1).onEnded { value in
-                        withAnimation {
-                            self.model.addStation(Station(name: "self.newStationName",
-                                                          position: value.location))
-                        }
+                        self.model.addStation(Station(name: "self.newStationName",
+                                                      position: value.location))
                     })
                 
                 ForEach(points, id: \.0) { point in
