@@ -20,8 +20,15 @@ struct ContentView: View {
         graph.addStation(Station(name: "北京", position: CGPoint(x: 50, y: 50)))
         graph.addStation(Station(name: "江苏", position: CGPoint(x: 90, y: 90)))
         graph.addStation(Station(name: "广州", position: CGPoint(x: 10, y: 100)))
+        graph.addStation(Station(name: "云南", position: CGPoint(x: 30, y: 200)))
+        graph.addStation(Station(name: "广西", position: CGPoint(x: 50, y: 10)))
+        graph.addStation(Station(name: "湖南", position: CGPoint(x: 100, y: 200)))
         graph.addSubwayLine(from: "上海", to: "北京")
-        graph.addSubwayLine(from: "广州", to: "江苏")
+        graph.addSubwayLine(from: "北京", to: "江苏")
+        graph.addSubwayLine(from: "江苏", to: "湖南")
+        graph.addSubwayLine(from: "上海", to: "广西")
+        graph.addSubwayLine(from: "上海", to: "湖南")
+        graph.addSubwayLine(from: "广西", to: "湖南")
         return graph
     }()
     
@@ -39,10 +46,17 @@ struct ContentView: View {
 
     
     var body: some View {
-        NavigationView {
+        let minPath = model.minPath(from: "上海", to: "湖南")
+        return NavigationView {
         VStack {
             ZStack {
                 SubwayLinesView(positions: model.subwayLines, show: showSubwayLines)
+                
+                ForEach(minPath.indices, id: \.self) { index in
+                    StretchableLineView(start: minPath[index].0, destination: minPath[index].1,
+                                     show: self.showRecommendedRoutes)
+                        .foregroundColor(Color.red)
+                }
                 
                 StationsView.init(stations: model.vertices)
                     .gesture(DragGesture(minimumDistance: 0.1).onEnded { value in
@@ -50,11 +64,6 @@ struct ContentView: View {
                                                       position: value.location))
                     })
                 
-                ForEach(points, id: \.0) { point in
-                    StretchableLineView(start: point.1, destination: point.2,
-                                     show: self.showRecommendedRoutes)
-                        .foregroundColor(Color.red)
-                }
             }
             
             Form {

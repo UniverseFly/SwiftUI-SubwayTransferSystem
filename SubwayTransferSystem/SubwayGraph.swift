@@ -61,7 +61,7 @@ struct SubwayGraph {
         for (index, value) in vertices.enumerated() { verticesToEvaluate.append((index, value)) }
         
         while !verticesToEvaluate.isEmpty {
-            let newIndex = verticesToEvaluate.removeMin { minDistances[$0] < minDistances[$1] }!
+            let newIndex = verticesToEvaluate.removeMin { minDistances[$0] < minDistances[$1] }!.index
             evaluatedVertices.append(newIndex)
             
             guard let nodes = arcs[newIndex] else { continue }
@@ -78,7 +78,8 @@ struct SubwayGraph {
         var index = destIndex
         while index != startIndex {
             path.append(index)
-            index = previous[index]!
+            guard let previous = previous[index] else { return [] }
+            index = previous
         }
         path.append(index)
         
@@ -93,15 +94,15 @@ struct SubwayGraph {
     }
 }
 
-private extension Array {
+private extension Array where Element == (index: Int, station: Station) {
     /// 根据 `condition` 找到最小的元素删除并返回下标
-    mutating func removeMin(where condition: (Int, Int) -> Bool) -> Int? {
+    mutating func removeMin(where condition: (Int, Int) -> Bool) -> Element? {
         if isEmpty { return nil }
         var min = 0
         for index in 1..<count {
             if condition(index, min) { min = index }
         }
-        remove(at: min)
-        return min
+        defer { remove(at: min) }
+        return self[min]
     }
 }
