@@ -16,14 +16,18 @@ struct SubwayGraph {
         var distance: Double
     }
     
-    var vertices = [Station]()
-    var arcs = [Int: Set<ArcNode>]()
+    private(set) var vertices = [Station]()
+    private(set) var arcs = [Int: Set<ArcNode>]()
     
     /// 站点名到它所在下标的 map
-    var stationToIndex = [String: Int]()
+    private(set) var stationToIndex = [String: Int]()
     
     /// 所有线路的起始和终点坐标
     private(set) var subwayLines: [(start: CGPoint, destination: CGPoint)] = []
+    
+    /// 最短路径的其实与目的下标
+    var minPathStartIndex = 0
+    var minPathDestIndex = 1
     
     mutating func addStation(_ station: Station) {
         if stationToIndex.keys.contains(station.name) { return }
@@ -44,18 +48,18 @@ struct SubwayGraph {
         subwayLines.append((startStation.position, destStation.position))
     }
     
-    /// 返回许多个点的坐标，代表最短路。参考 Introduction to algorithms
-    func minPath(from start: String, to destination: String) -> [(CGPoint, CGPoint)] {
-        /// 最短路中每个顶点的前驱点坐标，开始时都是 `nil`
+    /// 根据 `minPathStartIndex` 和 `minPathDestIndex` 返回最短路径
+    var minPath: [(CGPoint, CGPoint)] {
+        if minPathStartIndex < 0 || minPathStartIndex >= vertices.count { return [] }
+        if minPathDestIndex < 0 || minPathDestIndex >= vertices.count { return [] }
+        
         var previous = [Int?](repeating: nil, count: vertices.count)
         /// 假设一个最大值
         let doubleMax = 1e10
         /// 源点到每个顶点最短路径估计值，实时更新。
         var minDistances = [Double](repeating: doubleMax, count: vertices.count)
         
-        guard let startIndex = stationToIndex[start] else { return [] }
-        guard let destIndex = stationToIndex[destination] else { return [] }
-        minDistances[startIndex] = 0
+        minDistances[minPathStartIndex] = 0
         
         var evaluatedVertices: [Int] = []
         var verticesToEvaluate: [(index: Int, station: Station)] = []
@@ -76,8 +80,8 @@ struct SubwayGraph {
         }
         
         var path = [Int]()
-        var index = destIndex
-        while index != startIndex {
+        var index = minPathDestIndex
+        while index != minPathStartIndex {
             path.append(index)
             guard let previous = previous[index] else { return [] }
             index = previous
@@ -93,6 +97,56 @@ struct SubwayGraph {
         
         return positionPairs
     }
+//    
+//    /// 返回许多个点的坐标，代表最短路。参考 Introduction to algorithms
+//    func minPath(from start: String, to destination: String) -> [(CGPoint, CGPoint)] {
+//        /// 最短路中每个顶点的前驱点坐标，开始时都是 `nil`
+//        var previous = [Int?](repeating: nil, count: vertices.count)
+//        /// 假设一个最大值
+//        let doubleMax = 1e10
+//        /// 源点到每个顶点最短路径估计值，实时更新。
+//        var minDistances = [Double](repeating: doubleMax, count: vertices.count)
+//        
+//        guard let minPathStartIndex = stationToIndex[start] else { return [] }
+//        guard let destIndex = stationToIndex[destination] else { return [] }
+//        minDistances[minPathStartIndex] = 0
+//        
+//        var evaluatedVertices: [Int] = []
+//        var verticesToEvaluate: [(index: Int, station: Station)] = []
+//        for (index, value) in vertices.enumerated() { verticesToEvaluate.append((index, value)) }
+//        
+//        while !verticesToEvaluate.isEmpty {
+//            let newIndex = verticesToEvaluate.removeMin { minDistances[$0] < minDistances[$1] }!.index
+//            evaluatedVertices.append(newIndex)
+//            
+//            guard let nodes = arcs[newIndex] else { continue }
+//            // 松弛操作
+//            for arcNode in nodes {
+//                if minDistances[arcNode.index] > minDistances[newIndex] + arcNode.distance {
+//                    minDistances[arcNode.index] = minDistances[newIndex] + arcNode.distance
+//                    previous[arcNode.index] = newIndex
+//                }
+//            }
+//        }
+//        
+//        var path = [Int]()
+//        var index = destIndex
+//        while index != minPathStartIndex {
+//            path.append(index)
+//            guard let previous = previous[index] else { return [] }
+//            index = previous
+//        }
+//        path.append(index)
+//        
+//        let positions = path.reversed().map { vertices[$0].position }
+//        var positionPairs: [(CGPoint, CGPoint)] = []
+//        
+//        for index in 0..<positions.count-1 {
+//            positionPairs.append((positions[index], positions[index + 1]))
+//        }
+//        
+//        return positionPairs
+//    }
 }
 
 private extension Array where Element == (index: Int, station: Station) {

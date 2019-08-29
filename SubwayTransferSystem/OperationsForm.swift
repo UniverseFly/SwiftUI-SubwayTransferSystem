@@ -28,7 +28,7 @@ struct OperationsForm: View {
         }
         
         return Form {
-            Section {
+            Section(header: Text("新增站点")) {
                 TextField("新增的站点名", text: $newStationName)
             }
             

@@ -31,24 +31,18 @@ struct ContentView: View {
         return graph
     }()
     
-    @State private var startIndex = 0
-    @State private var destIndex = 0
     @State var showSubwayLines = true
     @State var showRecommendedRoutes = false
     @State var newStationName = ""
     
     
     var body: some View {
-        let startStation = model.vertices[startIndex].name
-        let destStation = model.vertices[destIndex].name
-        let minPath = model.minPath(from: startStation, to: destStation)
-        
-        return NavigationView {
+        NavigationView {
             VStack {
                 ZStack {
                     SubwayLinesView(positions: model.subwayLines, show: showSubwayLines)
                     
-                    MinPathsView(positions: minPath, show: showRecommendedRoutes)
+                    MinPathsView(positions: model.minPath, show: showRecommendedRoutes)
                     
                     StationsView(stations: model.vertices)
                         .gesture(DragGesture(minimumDistance: 0.1).onEnded { value in
@@ -60,8 +54,8 @@ struct ContentView: View {
                 
                 OperationsForm(model: $model, showRecommendedRoutes: $showRecommendedRoutes,
                                showSubwayLines: $showSubwayLines,
-                               startIndex_forMinPath: $startIndex,
-                               destIndex_forMinPath: $destIndex,
+                               startIndex_forMinPath: $model.minPathStartIndex,
+                               destIndex_forMinPath: $model.minPathDestIndex,
                                newStationName: $newStationName)
             }
         }
