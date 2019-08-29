@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-/// 用黄色显示所有的t地铁线路
+/// 用黄色显示所有的地铁线路
 struct SubwayLinesView: View {
     var positions: [(start: CGPoint, destination: CGPoint)]
     var show: Bool
