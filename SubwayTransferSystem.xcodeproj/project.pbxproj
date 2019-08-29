@@ -26,7 +26,7 @@
 		E2FDD9642312C46100B00793 /* StationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FDD9632312C46100B00793 /* StationsView.swift */; };
 		E2FDD9662312CA9D00B00793 /* PositionPairsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FDD9652312CA9D00B00793 /* PositionPairsView.swift */; };
 		E2FDD9682312D59A00B00793 /* AppUIOptionsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FDD9672312D59A00B00793 /* AppUIOptionsSection.swift */; };
-		E2FDD96A2312D62100B00793 /* StationPickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FDD9692312D62100B00793 /* StationPickerSection.swift */; };
+		E2FDD96A2312D62100B00793 /* NewSubwayLinePickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2FDD9692312D62100B00793 /* NewSubwayLinePickerSection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,7 +51,7 @@
 		E2FDD9632312C46100B00793 /* StationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationsView.swift; sourceTree = "<group>"; };
 		E2FDD9652312CA9D00B00793 /* PositionPairsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PositionPairsView.swift; sourceTree = "<group>"; };
 		E2FDD9672312D59A00B00793 /* AppUIOptionsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUIOptionsSection.swift; sourceTree = "<group>"; };
-		E2FDD9692312D62100B00793 /* StationPickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationPickerSection.swift; sourceTree = "<group>"; };
+		E2FDD9692312D62100B00793 /* NewSubwayLinePickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSubwayLinePickerSection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +118,7 @@
 				E2820352230FE52400D4F69C /* VertexView.swift */,
 				E2CB7FC92316E13E00E04009 /* MinPathPickerSection.swift */,
 				E2FDD9672312D59A00B00793 /* AppUIOptionsSection.swift */,
-				E2FDD9692312D62100B00793 /* StationPickerSection.swift */,
+				E2FDD9692312D62100B00793 /* NewSubwayLinePickerSection.swift */,
 				E2CB7FCB2316E2A100E04009 /* StringPicker.swift */,
 				E2FDD9612312C2F800B00793 /* StretchableLineView.swift */,
 			);
@@ -219,7 +219,7 @@
 				E2820341230FE48600D4F69C /* SceneDelegate.swift in Sources */,
 				E2CB7FD62317951500E04009 /* MinPathsView.swift in Sources */,
 				E2CB7FD223178A2700E04009 /* OperationsForm.swift in Sources */,
-				E2FDD96A2312D62100B00793 /* StationPickerSection.swift in Sources */,
+				E2FDD96A2312D62100B00793 /* NewSubwayLinePickerSection.swift in Sources */,
 				E2820343230FE48600D4F69C /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

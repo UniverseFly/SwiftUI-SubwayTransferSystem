@@ -18,7 +18,7 @@ struct OperationsForm: View {
                 TextField("新增的站点名", text: $model.newStation.name)
             }
             
-            StationPickerSection(stations: model.graph.vertices,
+            NewSubwayLinePickerSection(stations: model.graph.vertices,
                                  start: $model.newSubwayLineStartIndex,
                                  destination: $model.newSubwayLineDestIndex,
                                  action: { self.model.addSubwayLine() })
