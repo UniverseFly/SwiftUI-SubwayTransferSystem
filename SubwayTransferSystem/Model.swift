@@ -28,10 +28,10 @@ struct SubwayTransferSystem {
     var newSubwayLineStartIndex = 0
     var newSubwayLineDestIndex = 1
     
-    /// 通过图模型返回最短路径
+    /// 根据 `minPathStartIndex` 和 `minPathDestIndex` 返回最短路径
     var minPath: [(CGPoint, CGPoint)] {
-        if minPathDestIndex < 0 || minPathDestIndex >= graph.vertices.count { return [] }
         if minPathStartIndex < 0 || minPathStartIndex >= graph.vertices.count { return [] }
+        if minPathDestIndex < 0 || minPathDestIndex >= graph.vertices.count { return [] }
         
         let start = graph.vertices[minPathStartIndex].name
         let destination = graph.vertices[minPathDestIndex].name
@@ -39,12 +39,12 @@ struct SubwayTransferSystem {
         return graph.minPath(from: start, to: destination)
     }
     
-    /// 对内部的图进行操作增加站点
+    /// 根据 `newStation` 对内部的图进行操作增加站点
     mutating func addStation() {
         graph.addStation(newStation)
     }
     
-    /// 双向增加，变成无向图
+    /// 根据 `newSubwayLineStartIndex` 和 `newSubwayLineStartIndex` 添加线路
     mutating func addSubwayLine() {
         let start = graph.vertices[newSubwayLineStartIndex].name
         let destination = graph.vertices[newSubwayLineDestIndex].name

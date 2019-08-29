@@ -10,11 +10,10 @@ import SwiftUI
 
 /// 用红色覆盖显示最短路径线路
 struct MinPathsView: View {
-    var positions: [(start: CGPoint, destination: CGPoint)]
-    var show: Bool
+    var model: SubwayTransferSystem
     
     var body: some View {
-        PositionPairsView(positions: positions, show: show)
+        PositionPairsView(positions: model.minPath, show: model.showRecommendedRoutes)
             .foregroundColor(Color.red)
     }
 }

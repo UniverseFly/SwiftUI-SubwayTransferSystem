@@ -10,11 +10,10 @@ import SwiftUI
 
 /// 用黄色显示所有的地铁线路
 struct SubwayLinesView: View {
-    var positions: [(start: CGPoint, destination: CGPoint)]
-    var show: Bool
+    var model: SubwayTransferSystem
     
     var body: some View {
-        PositionPairsView(positions: positions, show: show)
+        PositionPairsView(positions: model.graph.subwayLines, show: model.showSubwayLines)
             .foregroundColor(Color.yellow)
     }
 }

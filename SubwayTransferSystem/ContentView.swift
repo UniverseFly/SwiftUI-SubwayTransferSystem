@@ -31,29 +31,13 @@ struct ContentView: View {
         NavigationView {
             VStack {
                 ZStack {
-                    SubwayLinesView(positions: model.graph.subwayLines, show: model.showSubwayLines)
-                    
-                    MinPathsView(positions: model.minPath, show: model.showRecommendedRoutes)
-                    
-                    StationsView(stations: model.graph.vertices)
-                        .gesture(DragGesture(minimumDistance: 0.1).onEnded { value in
-                            self.model.newStation.position = value.location
-                        })
-                    
+                    SubwayLinesView(model: model)
+                    MinPathsView(model: model)
+                    StationsView(model: $model)
                 }
                 
-                OperationsForm(model: $model.graph, showRecommendedRoutes: $model.showRecommendedRoutes,
-                               showSubwayLines: $model.showSubwayLines,
-                               startIndex_forMinPath: $model.minPathStartIndex,
-                               destIndex_forMinPath: $model.minPathDestIndex,
-                               newStationName: $model.newStation.name)
+                OperationsForm(model: $model)
             }
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }

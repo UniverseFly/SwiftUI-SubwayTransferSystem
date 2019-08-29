@@ -8,18 +8,19 @@
 
 import SwiftUI
 
-/// 只用来显示所有的站点以及添加站点，与线路无关
+/// 只用来显示所有的站点以及添加站点，与线路无关，
+/// 通过拖拽可以增减站点
 struct StationsView: View {
-    var stations: [Station]
+    @Binding var model: SubwayTransferSystem
     
     var body: some View {
-        ForEach(stationIndices, id: \.self) { index in
-            VertexView(name: self.stations[index].name)
-                .position(self.stations[index].position)
+        ForEach(model.graph.vertices.indices, id: \.self) { index in
+            VertexView(name: self.model.graph.vertices[index].name)
+                .position(self.model.graph.vertices[index].position)
+                .gesture(DragGesture(minimumDistance: 0.1).onEnded { value in
+                    self.model.newStation.position = value.location
+                    self.model.addStation()
+                })
         }
     }
-}
-
-private extension StationsView {
-    var stationIndices: Range<Int> { 0..<stations.count }
 }
