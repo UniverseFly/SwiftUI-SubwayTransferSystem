@@ -27,29 +27,20 @@ struct ContentView: View {
         return SubwayTransferSystem(graph: graph)
     }()
     
+    @ObservedObject var delegate = ContentViewDelegate()
+    
     var body: some View {
         VStack {
-            VStack {
-                HStack {
-                    Button(action: { self.model.scale += 0.2 }) { Text("➕") }
-                    Button(action: { self.model.scale -= 0.2 }) { Text("➖") }
-                }
-                Slider(value: $model.offset.x, in: -1000...1000)
-                Slider(value: $model.offset.y, in: -1000...1000)
-            }
-            .frame(width: 100)
-            .offset(x: 150)
-            
             ZStack {
                 SubwayLinesView(model: model)
                 MinPathsView(model: model)
                 StationsView(model: $model)
             }
-            .scaleEffect(model.scale)
-            .offset(x: model.offset.x, y: model.offset.y)
+            .scaleEffect(delegate.scale)
+            .offset(x: delegate.offset.x, y: delegate.offset.y)
             
             NavigationView {
-                OperationsForm(model: $model).navigationBarTitle("Options")
+                OperationsForm(model: $model, delegate: delegate).navigationBarTitle("Options")
             }
         }
     }

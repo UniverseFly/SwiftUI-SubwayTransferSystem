@@ -28,12 +28,6 @@ struct SubwayTransferSystem {
     var newSubwayLineStartIndex = 0
     var newSubwayLineDestIndex = 1
     
-    /// 画面的显示大小
-    var scale: CGFloat = 1.0
-    
-    /// 画面偏移量
-    var offset: (x: CGFloat, y: CGFloat) = (x: 0, y: 0)
-    
     /// 根据 `minPathStartIndex` 和 `minPathDestIndex` 返回最短路径
     var minPath: [(CGPoint, CGPoint)] {
         if minPathStartIndex < 0 || minPathStartIndex >= graph.vertices.count { return [] }
