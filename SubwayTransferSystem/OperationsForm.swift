@@ -15,7 +15,7 @@ struct OperationsForm: View {
     var body: some View {
         Form {
             Section(header: Text("改变大小")) {
-                Slider(value: $model.scale, in: 0...1)
+                Slider(value: $model.scale, in: 0...1.5)
             }
             Section(header: Text("改变 x 轴偏移量")) {
                 Slider(value: $model.offset.x, in: -1000...1000)
