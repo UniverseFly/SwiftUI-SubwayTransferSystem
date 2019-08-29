@@ -16,6 +16,7 @@
 		E2820353230FE52400D4F69C /* VertexView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2820352230FE52400D4F69C /* VertexView.swift */; };
 		E2820355230FE68700D4F69C /* Station.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2820354230FE68700D4F69C /* Station.swift */; };
 		E2820357230FF71600D4F69C /* SubwayGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2820356230FF71600D4F69C /* SubwayGraph.swift */; };
+		E28D4D612317BB150095F691 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28D4D602317BB150095F691 /* Model.swift */; };
 		E2CB7FCA2316E13E00E04009 /* MinPathPickerSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CB7FC92316E13E00E04009 /* MinPathPickerSection.swift */; };
 		E2CB7FCC2316E2A100E04009 /* StringPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CB7FCB2316E2A100E04009 /* StringPicker.swift */; };
 		E2CB7FD223178A2700E04009 /* OperationsForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2CB7FD123178A2700E04009 /* OperationsForm.swift */; };
@@ -40,6 +41,7 @@
 		E2820352230FE52400D4F69C /* VertexView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VertexView.swift; sourceTree = "<group>"; };
 		E2820354230FE68700D4F69C /* Station.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Station.swift; sourceTree = "<group>"; };
 		E2820356230FF71600D4F69C /* SubwayGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubwayGraph.swift; sourceTree = "<group>"; };
+		E28D4D602317BB150095F691 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		E2CB7FC92316E13E00E04009 /* MinPathPickerSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinPathPickerSection.swift; sourceTree = "<group>"; };
 		E2CB7FCB2316E2A100E04009 /* StringPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringPicker.swift; sourceTree = "<group>"; };
 		E2CB7FD123178A2700E04009 /* OperationsForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationsForm.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 				E2820346230FE48700D4F69C /* Preview Content */,
 				E2CB7FD0231789E800E04009 /* Supporting Models */,
 				E2820356230FF71600D4F69C /* SubwayGraph.swift */,
+				E28D4D602317BB150095F691 /* Model.swift */,
 				E2CB7FD3231794D000E04009 /* SubwayLinesView.swift */,
 				E2CB7FD52317951500E04009 /* MinPathsView.swift */,
 			);
@@ -211,6 +214,7 @@
 				E2CB7FCC2316E2A100E04009 /* StringPicker.swift in Sources */,
 				E282033F230FE48600D4F69C /* AppDelegate.swift in Sources */,
 				E2FDD9642312C46100B00793 /* StationsView.swift in Sources */,
+				E28D4D612317BB150095F691 /* Model.swift in Sources */,
 				E2CB7FCA2316E13E00E04009 /* MinPathPickerSection.swift in Sources */,
 				E2820341230FE48600D4F69C /* SceneDelegate.swift in Sources */,
 				E2CB7FD62317951500E04009 /* MinPathsView.swift in Sources */,

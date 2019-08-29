@@ -9,12 +9,8 @@
 import SwiftUI
 import CoreGraphics
 
-extension SubwayGraph {
-    var vertexIDs: Range<Int> { 0..<vertices.count }
-}
-
 struct ContentView: View {
-    @State var model: SubwayGraph = {
+    @State var model: SubwayTransferSystem = {
         var graph = SubwayGraph()
         graph.addStation(Station(name: "上海", position: CGPoint(x: 80, y: 10)))
         graph.addStation(Station(name: "北京", position: CGPoint(x: 50, y: 50)))
@@ -28,35 +24,29 @@ struct ContentView: View {
         graph.addSubwayLine(from: "江苏", to: "湖南")
         graph.addSubwayLine(from: "上海", to: "广西")
         graph.addSubwayLine(from: "广西", to: "湖南")
-        return graph
+        return SubwayTransferSystem(graph: graph)
     }()
-    
-    @State var showSubwayLines = true
-    @State var showRecommendedRoutes = false
-    @State var newStationName = ""
-    
     
     var body: some View {
         NavigationView {
             VStack {
                 ZStack {
-                    SubwayLinesView(positions: model.subwayLines, show: showSubwayLines)
+                    SubwayLinesView(positions: model.graph.subwayLines, show: model.showSubwayLines)
                     
-                    MinPathsView(positions: model.minPath, show: showRecommendedRoutes)
+                    MinPathsView(positions: model.minPath, show: model.showRecommendedRoutes)
                     
-                    StationsView(stations: model.vertices)
+                    StationsView(stations: model.graph.vertices)
                         .gesture(DragGesture(minimumDistance: 0.1).onEnded { value in
-                            self.model.addStation(Station(name: self.newStationName,
-                                                          position: value.location))
+                            self.model.newStation.position = value.location
                         })
                     
                 }
                 
-                OperationsForm(model: $model, showRecommendedRoutes: $showRecommendedRoutes,
-                               showSubwayLines: $showSubwayLines,
+                OperationsForm(model: $model.graph, showRecommendedRoutes: $model.showRecommendedRoutes,
+                               showSubwayLines: $model.showSubwayLines,
                                startIndex_forMinPath: $model.minPathStartIndex,
                                destIndex_forMinPath: $model.minPathDestIndex,
-                               newStationName: $newStationName)
+                               newStationName: $model.newStation.name)
             }
         }
     }
