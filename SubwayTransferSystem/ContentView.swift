@@ -27,14 +27,20 @@ struct ContentView: View {
         return SubwayTransferSystem(graph: graph)
     }()
     
+    @State var scale: CGFloat = 1.0
+    
     var body: some View {
         NavigationView {
             VStack {
+                Color.red.gesture(MagnificationGesture().onChanged { self.scale = $0 })
                 ZStack {
                     SubwayLinesView(model: model)
                     MinPathsView(model: model)
                     StationsView(model: $model)
-                }
+                }.scaleEffect(scale)
+//                .gesture(MagnificationGesture(minimumScaleDelta: 0.2).onChanged { value in
+//                    print("fuck")
+//                })
                 
                 OperationsForm(model: $model)
             }
