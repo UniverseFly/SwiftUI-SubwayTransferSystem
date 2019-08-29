@@ -10,7 +10,7 @@ import SwiftUI
 
 /// 用黄色显示所有的地铁线路
 struct SubwayLinesView: View {
-    var model: SubwayTransferSystem
+    @ObservedObject var model: SubwayTransferSystem
     
     var body: some View {
         PositionPairsView(positions: model.graph.subwayLines, show: model.showSubwayLines)

@@ -11,7 +11,7 @@ import SwiftUI
 /// 只用来显示所有的站点以及添加站点，与线路无关，
 /// 通过拖拽可以增减站点
 struct StationsView: View {
-    @Binding var model: SubwayTransferSystem
+    @ObservedObject var model: SubwayTransferSystem
     
     var body: some View {
         ForEach(model.graph.vertices.indices, id: \.self) { index in

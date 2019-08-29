@@ -10,7 +10,7 @@ import SwiftUI
 import CoreGraphics
 
 struct ContentView: View {
-    @State var model: SubwayTransferSystem = {
+    @ObservedObject var model: SubwayTransferSystem = {
         var graph = SubwayGraph()
         graph.addStation(Station(name: "上海", position: CGPoint(x: 80, y: 10)))
         graph.addStation(Station(name: "北京", position: CGPoint(x: 50, y: 50)))
@@ -27,20 +27,18 @@ struct ContentView: View {
         return SubwayTransferSystem(graph: graph)
     }()
     
-    @ObservedObject var delegate = ContentViewDelegate()
-    
     var body: some View {
         VStack {
             ZStack {
                 SubwayLinesView(model: model)
                 MinPathsView(model: model)
-                StationsView(model: $model)
+                StationsView(model: model)
             }
-            .scaleEffect(delegate.scale)
-            .offset(x: delegate.offset.x, y: delegate.offset.y)
+            .scaleEffect(model.scale)
+            .offset(x: model.offset.x, y: model.offset.y)
             
             NavigationView {
-                OperationsForm(model: $model, delegate: delegate).navigationBarTitle("Options")
+                OperationsForm(model: model).navigationBarTitle("Options")
             }
         }
     }
