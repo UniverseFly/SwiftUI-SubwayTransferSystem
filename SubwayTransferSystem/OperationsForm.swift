@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-/// 用户可以进行选择操作的表单
+/// 表示用户可以进行选择操作的表单
 struct OperationsForm: View {
     @Binding var model: SubwayTransferSystem
     
