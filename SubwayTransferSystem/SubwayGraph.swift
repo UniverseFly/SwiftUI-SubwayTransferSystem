@@ -26,6 +26,7 @@ struct SubwayGraph {
     private(set) var subwayLines: [(start: CGPoint, destination: CGPoint)] = []
     
     mutating func addStation(_ station: Station) {
+        if stationToIndex.keys.contains(station.name) { return }
         vertices.append(station)
         stationToIndex[station.name] = vertices.count - 1
     }
