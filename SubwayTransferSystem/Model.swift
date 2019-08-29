@@ -49,6 +49,5 @@ struct SubwayTransferSystem {
         let start = graph.vertices[newSubwayLineStartIndex].name
         let destination = graph.vertices[newSubwayLineDestIndex].name
         graph.addSubwayLine(from: start, to: destination)
-        graph.addSubwayLine(from: destination, to: start)
     }
 }
