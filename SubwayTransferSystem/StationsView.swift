@@ -17,7 +17,7 @@ struct StationsView: View {
         ForEach(model.graph.vertices.indices, id: \.self) { index in
             VertexView(name: self.model.graph.vertices[index].name)
                 .position(self.model.graph.vertices[index].position)
-                .gesture(DragGesture(minimumDistance: 0.1).onEnded { value in
+                .gesture(DragGesture().onEnded { value in
                     self.model.newStation.position = value.location
                     self.model.addStation()
                 })

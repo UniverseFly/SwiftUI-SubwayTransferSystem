@@ -27,22 +27,29 @@ struct ContentView: View {
         return SubwayTransferSystem(graph: graph)
     }()
     
-    @State var scale: CGFloat = 1.0
-    
     var body: some View {
-        NavigationView {
+        VStack {
             VStack {
-                Color.red.gesture(MagnificationGesture().onChanged { self.scale = $0 })
-                ZStack {
-                    SubwayLinesView(model: model)
-                    MinPathsView(model: model)
-                    StationsView(model: $model)
-                }.scaleEffect(scale)
-//                .gesture(MagnificationGesture(minimumScaleDelta: 0.2).onChanged { value in
-//                    print("fuck")
-//                })
-                
-                OperationsForm(model: $model)
+                HStack {
+                    Button(action: { self.model.scale += 0.2 }) { Text("➕") }
+                    Button(action: { self.model.scale -= 0.2 }) { Text("➖") }
+                }
+                Slider(value: $model.offset.x, in: -1000...1000)
+                Slider(value: $model.offset.y, in: -1000...1000)
+            }
+            .frame(width: 100)
+            .offset(x: 150)
+            
+            ZStack {
+                SubwayLinesView(model: model)
+                MinPathsView(model: model)
+                StationsView(model: $model)
+            }
+            .scaleEffect(model.scale)
+            .offset(x: model.offset.x, y: model.offset.y)
+            
+            NavigationView {
+                OperationsForm(model: $model).navigationBarTitle("Options")
             }
         }
     }
