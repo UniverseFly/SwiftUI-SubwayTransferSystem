@@ -10,27 +10,7 @@ import SwiftUI
 import CoreGraphics
 
 struct ContentView: View {
-    @ObservedObject var model: SubwayTransferSystem = {
-        var graph = SubwayGraph()
-        for stations in stations {
-            for station in stations {
-                var station = station
-                station.position.x = (station.position.x - 121.38) / 0.2 * 800;
-                station.position.y = (31.4 - station.position.y) / 0.2 * 800;
-                graph.addStation(station)
-            }
-        }
-        for stations in stations {
-            for index in 0..<stations.count-1 {
-                graph.addSubwayLine(from: stations[index].name, to: stations[index+1].name)
-            }
-            for index in (1..<stations.count).reversed() {
-                graph.addSubwayLine(from: stations[index].name, to: stations[index-1].name)
-            }
-        }
-        
-        return SubwayTransferSystem(graph: graph)
-    }()
+    @ObservedObject var model: SubwayTransferSystem = dataModel
     
     @State var showOptions = true
     

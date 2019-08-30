@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E2231D842318CDD500BE82E4 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2231D832318CDD500BE82E4 /* DataHandler.swift */; };
-		E2231D862318D69A00BE82E4 /* stations.json in Resources */ = {isa = PBXBuildFile; fileRef = E2231D852318D69900BE82E4 /* stations.json */; };
+		E2231D862318D69A00BE82E4 /* subwayData.json in Resources */ = {isa = PBXBuildFile; fileRef = E2231D852318D69900BE82E4 /* subwayData.json */; };
 		E282033F230FE48600D4F69C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E282033E230FE48600D4F69C /* AppDelegate.swift */; };
 		E2820341230FE48600D4F69C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2820340230FE48600D4F69C /* SceneDelegate.swift */; };
 		E2820343230FE48600D4F69C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2820342230FE48600D4F69C /* ContentView.swift */; };
@@ -33,7 +33,7 @@
 
 /* Begin PBXFileReference section */
 		E2231D832318CDD500BE82E4 /* DataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
-		E2231D852318D69900BE82E4 /* stations.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = stations.json; sourceTree = "<group>"; };
+		E2231D852318D69900BE82E4 /* subwayData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = subwayData.json; sourceTree = "<group>"; };
 		E282033B230FE48600D4F69C /* SubwayTransferSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SubwayTransferSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E282033E230FE48600D4F69C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E2820340230FE48600D4F69C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -69,6 +69,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E201D09C231979590039EDD9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E2231D852318D69900BE82E4 /* subwayData.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		E2820332230FE48600D4F69C = {
 			isa = PBXGroup;
 			children = (
@@ -92,7 +100,7 @@
 				E2820340230FE48600D4F69C /* SceneDelegate.swift */,
 				E2820342230FE48600D4F69C /* ContentView.swift */,
 				E2231D832318CDD500BE82E4 /* DataHandler.swift */,
-				E2231D852318D69900BE82E4 /* stations.json */,
+				E201D09C231979590039EDD9 /* Resources */,
 				E2CB7FD123178A2700E04009 /* OperationsForm.swift */,
 				E2CB7FCF231789B500E04009 /* Supporting Views */,
 				E2FDD9632312C46100B00793 /* StationsView.swift */,
@@ -199,7 +207,7 @@
 			files = (
 				E282034B230FE48700D4F69C /* LaunchScreen.storyboard in Resources */,
 				E2820348230FE48700D4F69C /* Preview Assets.xcassets in Resources */,
-				E2231D862318D69A00BE82E4 /* stations.json in Resources */,
+				E2231D862318D69A00BE82E4 /* subwayData.json in Resources */,
 				E2820345230FE48700D4F69C /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
