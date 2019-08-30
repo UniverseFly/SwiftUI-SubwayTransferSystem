@@ -24,16 +24,16 @@ struct ContentView: View {
         graph.addSubwayLine(from: "江苏", to: "湖南")
         graph.addSubwayLine(from: "上海", to: "广西")
         graph.addSubwayLine(from: "广西", to: "湖南")
-        for station in stations {
-            var station = station
-            station.position.x = (station.position.x - 121.38) / 0.2 * 800;
-            station.position.y = (31.4 - station.position.y) / 0.2 * 800;
-            graph.addStation(station)
-        }
-        for index in 0..<stations.count-1 {
-            graph.addSubwayLine(from: stations[index].name, to: stations[index+1].name)
-        }
-        
+//        for station in stations {
+//            var station = station
+//            station.position.x = (station.position.x - 121.38) / 0.2 * 800;
+//            station.position.y = (31.4 - station.position.y) / 0.2 * 800;
+//            graph.addStation(station)
+//        }
+//        for index in 0..<stations.count-1 {
+//            graph.addSubwayLine(from: stations[index].name, to: stations[index+1].name)
+//        }
+//
         return SubwayTransferSystem(graph: graph)
     }()
     

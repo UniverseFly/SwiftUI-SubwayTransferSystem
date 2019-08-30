@@ -9,7 +9,7 @@
 import Foundation
 import CoreGraphics
 
-let stations: [Station] = load("stations.json")
+let stations: [[Station]] = load("stations.json")
 
 func load<T: Decodable>(_ filename: String, as type: T.Type = T.self) -> T {
     let data: Data
