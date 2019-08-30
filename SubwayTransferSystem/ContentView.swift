@@ -24,12 +24,14 @@ struct ContentView: View {
             .scaleEffect(model.scale)
             .offset(x: model.offset.x, y: model.offset.y)
             
-            optionsShowToggle
-            if showOptions {
-                NavigationView {
-                    OperationsForm(model: model).navigationBarTitle("☑️ Options")
+            VStack {
+                optionsShowToggle
+                if showOptions {
+                    NavigationView {
+                        OperationsForm(model: model).navigationBarTitle("☑️ Options")
+                    }
+                    .transition(.move(edge: .bottom))
                 }
-                .transition(.move(edge: .bottom))
             }
             
         }.background(background)
