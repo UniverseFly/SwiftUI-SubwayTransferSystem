@@ -43,14 +43,13 @@ struct ContentView: View {
             }
             .scaleEffect(model.scale)
             .offset(x: model.offset.x, y: model.offset.y)
-            .border(Color.green)
             
-            optionsShowToggle.border(Color.red)
+            optionsShowToggle
             if showOptions {
                 NavigationView {
                     OperationsForm(model: model).navigationBarTitle("☑️ Options")
                 }
-                .transition(.move(edge: .bottom)).border(Color.blue)
+                .transition(.move(edge: .bottom))
             }
             
         }.background(background)
