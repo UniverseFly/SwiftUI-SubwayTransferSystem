@@ -1,4 +1,4 @@
-# Subway Transfer System implemented in SwiftUI
+# Subway Transfer System Implemented in SwiftUI
 
 **State:** Completed 
 
@@ -6,5 +6,4 @@
 
 ## Effects
 
-![presentation](Assets/Presentation.png)
-
+<img src="Assets/Presentation.png" width=50% />
