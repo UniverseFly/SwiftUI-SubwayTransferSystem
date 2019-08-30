@@ -1,4 +1,10 @@
 # Subway Transfer System implemented in SwiftUI
 
-### Status: Developing💻
+**State:** Completed 
+
+> Wait for more docs, gifs, images, etc..
+
+## Effects
+
+![presentation](Assets/Presentation.png)
 
