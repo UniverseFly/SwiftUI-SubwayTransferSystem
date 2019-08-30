@@ -101,7 +101,7 @@ struct SubwayGraph: Codable {
 }
 
 private extension Array {
-    /// 根据 `condition` 找到最小的元素删除并返回下标
+    /// 根据 `condition` 找到最小的元素删除并返回该元素
     mutating func removeMin(where condition: (Element, Element) -> Bool) -> Element? {
         if isEmpty { return nil }
         var min = (index: 0, value: first!)
