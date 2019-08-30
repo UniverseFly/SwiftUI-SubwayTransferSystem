@@ -25,3 +25,5 @@ extension Station: Hashable {
         name.hash(into: &hasher)
     }
 }
+
+extension Station: Codable {}

@@ -38,7 +38,7 @@ class SubwayTransferSystem: ObservableObject {
     @Published var offset: (x: CGFloat, y: CGFloat) = (x: 0, y: 0)
     
     /// 根据 `minPathStartIndex` 和 `minPathDestIndex` 返回最短路径
-    var minPath: [(CGPoint, CGPoint)] {
+    var minPath: [SubwayGraph.StationPair] {
         if minPathStartIndex < 0 || minPathStartIndex >= graph.vertices.count { return [] }
         if minPathDestIndex < 0 || minPathDestIndex >= graph.vertices.count { return [] }
         

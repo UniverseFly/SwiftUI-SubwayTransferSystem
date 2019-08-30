@@ -11,7 +11,7 @@ import SwiftUI
 /// 将许多个坐标对连成一片直线，为之后的 `SubwayLinesView` 与
 /// `MinPathsView` 服务
 struct PositionPairsView: View {
-    var positions: [(start: CGPoint, destination: CGPoint)]
+    var positions: [SubwayGraph.StationPair]
     var show: Bool
     
     var body: some View {
