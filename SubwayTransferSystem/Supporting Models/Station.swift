@@ -15,8 +15,8 @@ struct Station {
     
     static func distance(_ lhs: Self, _ rhs: Self) -> Double {
         let deltaX = lhs.position.x - rhs.position.x
-        let deltaY = rhs.position.y - rhs.position.y
-        return Double(deltaX * deltaY)
+        let deltaY = lhs.position.y - rhs.position.y
+        return sqrt(Double(deltaX * deltaX + deltaY * deltaY))
     }
 }
 

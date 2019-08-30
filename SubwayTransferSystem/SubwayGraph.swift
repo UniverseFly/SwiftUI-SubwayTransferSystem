@@ -63,13 +63,12 @@ struct SubwayGraph: Codable {
         guard let destIndex = stationToIndex[destination] else { return [] }
         minDistances[startIndex] = 0
         
-        var evaluatedVertices: [Int] = []
         var verticesToEvaluate: [(index: Int, station: Station)] = []
         for (index, value) in vertices.enumerated() { verticesToEvaluate.append((index, value)) }
         
         while !verticesToEvaluate.isEmpty {
-            let newIndex = verticesToEvaluate.removeMin { minDistances[$0] < minDistances[$1] }!.index
-            evaluatedVertices.append(newIndex)
+            let newIndex = verticesToEvaluate.removeMin {
+                minDistances[$0.index] < minDistances[$1.index] }!.index
             
             guard let nodes = arcs[newIndex] else { continue }
             // 松弛操作
@@ -101,15 +100,16 @@ struct SubwayGraph: Codable {
     }
 }
 
-private extension Array where Element == (index: Int, station: Station) {
+private extension Array {
     /// 根据 `condition` 找到最小的元素删除并返回下标
-    mutating func removeMin(where condition: (Int, Int) -> Bool) -> Element? {
+    mutating func removeMin(where condition: (Element, Element) -> Bool) -> Element? {
         if isEmpty { return nil }
-        var min = 0
+        var min = (index: 0, value: first!)
         for index in 1..<count {
-            if condition(index, min) { min = index }
+            let value = self[index]
+            if condition(value, min.value) { min = (index, value) }
         }
-        defer { remove(at: min) }
-        return self[min]
+        remove(at: min.index)
+        return min.value
     }
 }
