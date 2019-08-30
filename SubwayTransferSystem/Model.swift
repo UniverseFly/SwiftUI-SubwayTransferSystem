@@ -33,9 +33,21 @@ class SubwayTransferSystem: ObservableObject {
     @Published var newSubwayLineStartIndex = 0
     @Published var newSubwayLineDestIndex = 1
     
-    /// 界面的缩放比例以及视图偏移量
-    @Published var scale: CGFloat = 1.0
-    @Published var offset: (x: CGFloat, y: CGFloat) = (x: 0, y: 0)
+    /// 基础缩放比例
+    @Published var baseScale: CGFloat = 1
+    /// 比例增加量
+    @Published var deltaScale: CGFloat = 0
+    /// 真实比例
+    var scale: CGFloat { baseScale + deltaScale }
+    
+    /// 基点
+    @Published var baseOffset = CGPoint(x: 0, y: 0)
+    /// 基点偏移量
+    @Published var deltaOffset = CGPoint(x: 0, y: 0)
+    /// 真实偏移量
+    var offset: CGPoint {
+        .init(x: baseOffset.x + deltaOffset.x, y: baseOffset.y + deltaOffset.y)
+    }
     
     /// 根据 `minPathStartIndex` 和 `minPathDestIndex` 返回最短路径
     var minPath: [SubwayGraph.StationPair] {

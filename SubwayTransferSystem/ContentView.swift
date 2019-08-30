@@ -12,18 +12,6 @@ import CoreGraphics
 struct ContentView: View {
     @ObservedObject var model: SubwayTransferSystem = {
         var graph = SubwayGraph()
-//        graph.addStation(Station(name: "上海", position: CGPoint(x: 80, y: 10)))
-//        graph.addStation(Station(name: "北京", position: CGPoint(x: 50, y: 50)))
-//        graph.addStation(Station(name: "江苏", position: CGPoint(x: 90, y: 90)))
-//        graph.addStation(Station(name: "广州", position: CGPoint(x: 10, y: 100)))
-//        graph.addStation(Station(name: "云南", position: CGPoint(x: 30, y: 200)))
-//        graph.addStation(Station(name: "广西", position: CGPoint(x: 50, y: 10)))
-//        graph.addStation(Station(name: "湖南", position: CGPoint(x: 100, y: 200)))
-//        graph.addSubwayLine(from: "上海", to: "北京")
-//        graph.addSubwayLine(from: "北京", to: "江苏")
-//        graph.addSubwayLine(from: "江苏", to: "湖南")
-//        graph.addSubwayLine(from: "上海", to: "广西")
-//        graph.addSubwayLine(from: "广西", to: "湖南")
         for stations in stations {
             for station in stations {
                 var station = station
@@ -40,9 +28,11 @@ struct ContentView: View {
                 graph.addSubwayLine(from: stations[index].name, to: stations[index-1].name)
             }
         }
-
+        
         return SubwayTransferSystem(graph: graph)
     }()
+    
+    @State var showOptions = true
     
     var body: some View {
         VStack {
@@ -53,9 +43,50 @@ struct ContentView: View {
             }
             .scaleEffect(model.scale)
             .offset(x: model.offset.x, y: model.offset.y)
+            .border(Color.green)
             
-            NavigationView {
-                OperationsForm(model: model).navigationBarTitle("Options")
+            optionsShowToggle.border(Color.red)
+            if showOptions {
+                NavigationView {
+                    OperationsForm(model: model).navigationBarTitle("☑️ Options")
+                }
+                .transition(.move(edge: .bottom)).border(Color.blue)
+            }
+            
+        }.background(background)
+    }
+    
+    /// 整个 app 的背景
+    var background: some View {
+        Color.white
+            .gesture(MagnificationGesture().onChanged{ scale in
+                self.model.deltaScale = scale - 1
+            }.onEnded { scale in
+                self.model.baseScale += (scale - 1)
+                self.model.deltaScale = 0
+            })
+            .highPriorityGesture(DragGesture().onChanged { value in
+                self.model.deltaOffset.x = value.location.x - value.startLocation.x
+                self.model.deltaOffset.y = value.location.y - value.startLocation.y
+            }.onEnded { value in
+                self.model.baseOffset.x += value.location.x - value.startLocation.x
+                self.model.baseOffset.y += value.location.y - value.startLocation.y
+                self.model.deltaOffset = .init(x: 0, y: 0)
+            })
+    }
+    
+    /// 控制是否显示 Options 界面的按钮
+    var optionsShowToggle: some View {
+        HStack {
+            Spacer()
+            Button(action: {
+                withAnimation(.spring()) { self.showOptions.toggle() }
+            }) {
+                Image(systemName: "chevron.right.circle")
+                    .imageScale(.large)
+                    .padding()
+                    .rotationEffect(.degrees(showOptions ? 90 : 0))
+                    .scaleEffect(showOptions ? 1.5 : 1)
             }
         }
     }
