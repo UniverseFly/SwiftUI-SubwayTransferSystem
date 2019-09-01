@@ -20,10 +20,4 @@ struct Station {
     }
 }
 
-extension Station: Hashable {
-    func hash(into hasher: inout Hasher) {
-        name.hash(into: &hasher)
-    }
-}
-
 extension Station: Codable {}
