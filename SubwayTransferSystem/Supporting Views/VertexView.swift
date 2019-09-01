@@ -15,7 +15,8 @@ struct VertexView: View {
     
     var body: some View {
         VStack(spacing: 5) {
-            if (showDetail) { Text(name).padding(5).background(Color.gray.opacity(0.4))
+            if (showDetail) {
+                Text(name).padding(5).background(Color.gray.opacity(0.4))
             }
             Circle()
                 .foregroundColor(Color.gray)
