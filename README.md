@@ -7,3 +7,8 @@
 ## Effects
 
 <img src="Assets/Presentation.png" width=50% />
+
+## 📑 Report
+
+[Here](Report.pdf)
+
